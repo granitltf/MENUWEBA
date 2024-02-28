@@ -1,0 +1,89 @@
+{%  extends 'main.html' %}
+
+{% block content %}
+
+<br>
+<div class="row">
+	<div class="col-md-5">
+		<h5>Liste des plats proposés</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'ajout_plat' %}">Ajouter un plat</a>
+			<table class="table table-sm">
+				<tr>
+					<th>ID</th>
+					<th>Nom_plat</th>
+					<th>Prix</th>
+                    <th>Mettre à jour</th>
+					<th>Delete</th>
+				</tr>
+                {% for nourriture in manger %}
+                <tr>  
+                <th>{{ nourriture.id }}</th>
+                <th>{{ nourriture.nom_plat }}</th>
+                <th>{{ nourriture.prix_plat }}</th>  
+                <th><a class='btn btn-sm btn-info' href="{% url 'modifier_plat' nourriture.id %}">Modifier</a></th>
+                <th><a class='btn btn-sm btn-danger' href="{% url 'supprimer_plat' nourriture.id %}">Supprimer</a></th>
+                
+                </tr>      
+                {% endfor %}
+			</table>
+		</div>
+	</div>
+
+	<div class="col-md-7">
+		<h5>Liste des boissons proposées</h5>
+		<hr>
+		<div class="card card-body">
+			<a class="btn btn-primary  btn-sm btn-block" href="{% url 'ajout_boisson' %}">Ajouter une boisson</a>
+			<table class="table table-sm">
+				<tr>
+					<th>Nom</th>
+					<th>Taille</th>
+					<th>Prix</th>
+					<th>Mettre à jour</th>
+					<th>Delete</th>
+				</tr>
+                {% for boisson in boire %}
+                <tr>
+					<th>{{ boisson.nom_boisson }}</th>
+					<th>{{ boisson.taille_boisson}}</th>
+					<th>{{ boisson.prix_boisson }}</th>
+					<th><a class='btn btn-sm btn-info' href="{% url 'modifier_boisson' boisson.id %}">Modifier</a></th>
+					<th><a class='btn btn-sm btn-danger' href="{% url 'supprimer_boisson' boisson.id %}">Supprimer</a></th>
+				</tr>
+                {% endfor %}
+			</table>
+		</div>
+	</div>
+
+    <br>
+
+    <div class="col-md-9">
+		<h5>Choisissez votre menu</h5>
+		<hr>
+		<div class="card card-body">
+            <a class="btn btn-primary  btn-sm btn-block" href="{% url 'ajout_commande' %}">Ajouter une commande</a>
+			<table class="table table-sm">
+				<tr>
+					<th>Entrée</th>
+					<th>Boisson(s)</th>
+				</tr>
+                {% for choix in commande %}
+                <tr>
+                    <th>{{ choix.manger }}</th>
+                    <th>{{ choix.boire }}</th>
+{#                    <th>#}
+{#                        {% for boisson in choix.boire.all %}#}
+{#                            {{ boisson.nom_boisson }}{% if not forloop.last %}, {% endif %}#}
+{#                        {% endfor %}#}
+{#                    </th>#}
+                </tr>
+                {% endfor %}
+                
+			</table>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

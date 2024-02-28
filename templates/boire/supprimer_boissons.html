@@ -1,0 +1,11 @@
+{%  extends 'main.html' %}
+
+{% block content %}
+    
+<p>Voulez-vous supprimer cette boisson ?</p>
+<form action="{% url 'supprimer_boisson' item.id %}" method="post">
+    {% csrf_token %}
+    <a class="btn btn-warning" href="{% url 'acceuil' %}">Annuler</a>
+    <input class="btn btn-danger" type="submit" name="Confirmer">
+</form>
+ {% endblock %}
